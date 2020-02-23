@@ -1,0 +1,21 @@
+---
+- hosts: all
+  become: yes
+  vars:
+    ansible_python_interpreter: "/usr/bin/env python3"
+
+  tasks:
+  - name: Setting syslog config
+    copy:
+      dest: "/etc/docker/daemon.json"
+      content: |
+        {"log-driver": "syslog","log-opts": {"syslog-address": "udp://127.0.0.1:514"}}
+
+  - name: Installing Docker
+    apt:
+      name: "docker.io"
+      update_cache: yes
+
+  - name: Fixing sock
+    command: chmod 666 /var/run/docker.sock
+ 

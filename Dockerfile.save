@@ -1,0 +1,7 @@
+# Base image Ubuntu 16.04
+FROM ubuntu:16.04
+# Update Ubunt# Install nginx, php-fpm and supervisord from ubuntu repository
+RUN apt-get install -y nginx php7.0-fpm supervisor && \
+    rm -rf /var/lib/apt/lists/*u Software repository
+RUN apt-get update
+
